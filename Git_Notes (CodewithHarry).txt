@@ -1,0 +1,655 @@
+Commands:
+
+git stats
+git add --all
+git commit -m "This are the Interview question which i want to keep safe"
+git init
+
+
+
+
+Git is a Version Control System. It has following advantages:
+
+1. Easily recover files.
+2. Roll back to previously working state.
+3. Git records snapshots not differences. 
+4. Almost every operation is local.
+5. Git maintains integrity.
+6. Git generally only adds data.
+
+Git - Thre Stage Architecture
+
+
+
+
+Session-1
+
+* Why is Git around?
+  - Traditional handling of files with code changes in the company was getting difficult.
+  - It was demanding and required lot of manual efforts to maintain the consistency of the file.
+  - Plus, even if we maintain such file on local servers, security issue and space issue was a major 
+  concern for the companies.
+  - It required a solution which would be flexible to use and recovery of files should be seamless.
+  - We can easily figure out who introduced the issue in the code. Suppose, an application was
+  running successfully but after some code changes it started malfunctioning or stopped working.
+  With the help of Version Control System, we can easily track who and when made the changes.
+  - After above scenario, we can easily rollback to previously working state of the application.
+
+* History of Version Control System (VCS)
+  - It started from a problem of handling zip files of codes but soon they realised that they'll 
+  require some System with better options.
+  - They started to use DB for Local Version Control System (LVCS) to keep track of files. But all 
+  this changes were saved on a local machine.  
+  - Suppose, harry developed a website and stored all the code files using LVCS, but one day his 
+  local System crashed and he lost all data, So it was not safe to keep files on a local machine.
+  But instead of not having any VCS, this System will work in most of the cases like we can track files 
+  and rollback etc.
+  - Considering above drawbacks, they came up with Centralized VCS. In this, developers used to fetch
+  code files from one Centralized server,make changes and push it back to that server. But again the 
+  same problem arised as if this Centralized server crashes then we definitely will not lose all the 
+  code files as someone will have those files downoaded to their System so we can use that file but
+  we are losing versions here which is a main idea behind building VCS.
+  - Now, again Considering above drawbacks developers came up with another mechanism which is called
+  Distributed VCS. Means, team which is using this mechanism will have entire backup with them all 
+  the time. It uses smart mechanism due to which developers dont dowlnoad all the data but download
+  only the source code which helps to save space. For e.g: If the data is of 2GB and it keeps rising
+  then developers will dowlnoad only the source code of it which will be in Kbs.
+
+ * How Git was created?
+   - Linux Torvalds and his team was developing the Linux Kernel and during this time (1991-2002),
+   they were not using any VCS for their code files but in 2002 as the fles grew exponentially they 
+   realised that we need to have some VCS so thatthey can manage the code files securely and in effecient way.
+   - In 2002, they started using Bitkeeper VCS. They used this VCS till 2005 but in 2005 company came up
+   with the heavy pricing model for Linus and team stating they cant provide their services for free anymore 
+   and asked them to pay heavy amount if they want to use their VCS.
+   - So, after revoking the services by Bitkeeper, Linus discussed and convinced his team not to worry 
+   about VCS and he promised to come up with something fresh which will solve their issues.
+   - Linus started working on a new project in 2005 and launched Git. 
+
+* Git Features
+  - Git takes a snapshot instead of recording the differences.
+  - Almost every operation is local.
+  - Git has integrity. Git stores and verifies the file on the basis of checksum.
+  - Git generally only adds data.                                                                                           (Session-1 Ends)
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+  Session-2
+
+* Installation of Git
+  - Git has a Straightforward process for installation.
+  - After installation of Git, We'll get Git bash which is a CLI for Git.
+  - It is recommended to use Git bash as we get more options here.
+  - We need to configure the git so that it can identify who we are. For this we use following commands.
+    $ git config --global user.name "sagar"
+    $ got config --global user.email "sagar50550@gmail.com"
+
+    To check the above details are saved in git we use followimg Command
+    $ git config --list
+
+    To check the username and email we have followimg commands
+    $ git config user.name
+    $ git config user.email                                                                                                 (Session-2 Ends)
+ 
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+Session-3
+
+* Git- Three Stage Architecture
+
+Working Directory ---> Staging area ---> git Directory
+       |                     |                 |
+       |-------Checkout the Project------------|                 
+       |                     |                 | 
+       | Stage files------>>>|                 |
+       |                     |                 |
+       |                     |                 |
+       |                     | Commit------->>>| 
+       |                     |                 |
+       |                     |                 |
+
+  Working Directory
+  -----------------
+  - Suppose we have a folder, in that we have 
+    - index.html
+    - static
+      - temp
+      - log
+    - engine.js
+  - We are working on above files and all files are functioning properly, but we want to work on 
+  its design in future.
+  - As all the files are working properly, we'd like to save this files so that even if we edit this
+  files in future and error occurs, we should get the applicable running based on this version.
+  - For this, we will take a snapshot of the state of this directory. This process is called Commit.
+  We'll commit this directory and will add a message stating "this is my working V1" 
+  - Suppose, we started working on above files and the task for index.html is complete and also index.css
+  is also working fine but while working on engine.js we got some errors and it's not running properly.
+  In this case, we can send index.html and index.css file for staging and skip the engine.js file.
+  So, in short, we are taking index.html and index.css file from present version and engine.js from a 
+  previous version.
+    
+  Staging Area
+  ------------
+  - We'll consider above situation. In this, we are ready to commit two files index.html and index.css file.
+  But we want to skip engine.js as its not completed yet.
+  - Staging area is an Intermediate stage where we are sure about certain files we want to commit.
+  In our example, we are sure index.html and index.css files are working and we can commit but we are not sure
+  about engine.js file. So, we wont push this file into staging area.
+
+  Git Directory
+  -------------
+  - Continuing the scenario, as we pushed two files index.html and index.css into staging area, Now this files
+  are ready to be pushed into Git directory which is a last stage.
+  - Once, the code files are pushed into git directory, we can fetch it anytime to edit those files and the 
+  integrity will be handled by git itself.
+  - It is not necessary to push the file into staging area first. If we are sure about the final commit
+  we can directly push the file into Git directory. But it is the best practice to push the file first into 
+  staging area and give the final commit for Git directory.                                                                 (Session-3 Ends)
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+Session-4
+
+* Commands to work wit Git
+   
+  $ git status
+    - This is the most widely used command. We use this command to check the status of our git directory.
+    - Details like which files are in Git directory and which files are yet to go in staging area.
+    which files are modified recently and are not added to stage area yet. Such updates we will get this command.
+
+  $ git init
+
+  $ git status
+  fatal: not a git repository (or any of the parent directories): .git
+    - If we face above error after giving init command, then it shows that git is not initialized yet in this folder.
+    - When we initialize git from any folder, it doesnt fetch that folder automatically. We need to initiate a process 
+    by giving above command.
+
+  $ git add --a
+    - This command adds all the files present in current working directory to staging Area.
+    - --a stands for All.
+
+  $ git commit -m "Initial commit"
+    - This is the command with which we push the file into git directory which is a final stage.
+    - -m stands for message so that if someone want to know what modifications or what was achieved while giving 
+    this commit then anyone can see that by running git status.
+    - It is recommended to run git status command after running git commit to check any file is pending to be 
+    added.
+
+  $ git log
+    - This command shows all the information about the commits like who committed the files and also 
+    gives accurate time so that if issue happens in production we should be able to track easily.
+    - It also gives the message which we provide at the time of commit so that everyone should have a fair idea
+    what was the commit about.
+
+  $ git add sample1.txt
+    - Suppose we have two files in the working directory but we are working on one of it and work on another is done.
+    We want to commit that file only.
+    - In this case, we give above command by specifying the name of that file.
+    
+  $ rm -rf .git
+    - Above command is very risky to use because it deletes the directory which we were pushing to the Git.
+    - It deletes the .git directory and stops tracking the directory as well.                                                (Session-4 Ends)
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+Session-5
+
+* Cloning a Remote Git repository from GitHub
+  - We will be cloning the tensorflow repository from github.
+  - To clone the repo we will use below command
+  $ git clone https://github.com/tensorflow/tensorflow.git
+  - Once cloned, we will make some changes in one of the files by going into tensorflow directory.
+  - If we check the git status of this folder then it'll list modified file.
+  - And if we check the git log then we'll get to know which user&email modified that file with timestamp. 
+  (Basically we are messing up with one of the file so that we can test the rollback feature of Git
+  so modification means we are introducing error in one of the file).                                                        (Session-5 Ends)
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+Session-6
+
+* File Status Lifecycle
+
+  
+Untracked             Unmodified            Modified               Staged
+    |                      |                    |                     |
+    |                      |Edit the file---->>>|                     |
+    |Add the file------->>>|                    |                     |
+    |                      |                    |Stage the file---->>>|
+    |                      |                    |                     |
+    |<<<----Remove the file|                    |                     |
+    |                      |                    |                     |
+    |                      |<<<-------------- Commit------------------|       
+    |                      |                    |                     |
+
+
+   - Suppose, we have a directory in which we have lot of files and folders for example f1,f2,f3 and 
+   folder1,folder2. This entire folder which contain all this files is called repository also called 
+   as Working directory.
+   - One folder which is being tracked by Git, in this folder we have one folder named .git which is a
+   hidden folder. This folder contains all the information related to version control. Whatever we give 
+   commands to git, .git folder stores all the information about it. Basically, .git folder keeps all the 
+   information about commits which we did.
+   - First, when we want to initiate the git we check the status of that directory. If we get fatal error
+   then give git init command. Then, git gets initialized and it creates .git directory in a working directory.
+   - Untracked: After above step, By default all the files inside this folder becomes Untracked. We'll 
+   add this files by git add --a, then this file becomes Unmodified. 
+   - Staged: When we add files it becomes Unmodified and gets pushed to Staged area.
+   - Suppose we modified f1 and f2, then this file becomes modified. Then remember that we added all the 
+   files initially. So this two files are present in Modified as well as Unmodified/Staged state too.
+   Now, to reflect this two files in Staging, we have to add this two files again. 
+   - So the command git add --a serves two purpose.
+     1. To add files in Staging area.
+     2. To make the files Unmodified.                                                                                        (Session-6 Ends)
+    
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+Session-7
+
+* Ignoring files in Git
+  - Suppose we have application running and it is generating logs and we can have several log files which 
+  is not important for us but at the time of adding files we want to Ignore such files.
+  - Git has a mechanism using which we can ignore such files. We have to create .gitignore file in the 
+  working directory. Then we'll add the name of the file which we want to ignore in this file.
+  For example: I have error.log in working directory and i want to ignore it then i'll mention the name of 
+  this file in .gitignore as it is and will save it. Then we'll check the git status and git will stop 
+  tracking this file.
+  - If error.log file keeps on changing still it won't be shown in git status as modified. As in our case,
+  we are ignoring log file, generally when log files are generated it has some naming pattern in it.
+  like for example error1,erro2,error3.log. Instead of mentioning so many names in a .gitignore file we can
+  simply mention the pattern of the file like *.log so whatever the name is it'll ignore all files which has
+  .log extension.
+  - Suppose we have a created a directory which contains all ignored files but accidentally one normal file
+  gets created there which is not being ignored. Then if we run git status, this directory will be listed
+  there just because of this one file which we haven't mentioned to ignore. If this created file is not important
+  and still we want to ignore this directory then we can simply mention the directory name in .gitignore file.
+  For example: dir/. So even if some new files gets created here it wont show you while checking the git status.
+  - If we have mentioned the name of directories in .gitignore which is subdirectory (dir) of another directory(static)
+  then it wont show this main directory also in git status because for git content matters. But if we have files
+  in the main directory which is not in the list of .gitignore then it'll show this Directory in git status.
+  - We can also add the entire path of the file/directory which we want ignore in .gitignore. So, .gitignore
+  can take complex patterns like negation etc as per the requirement.                                                        (Session-7 Ends)
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+Session-8
+
+* Showing Changes Between Commits, Staging Area and Working Directory
+  - When working in different env in companies and dealing with lot of files on a daily basis and working
+  with git, we might get confuse and want to check the difference between what we have in our Staging area
+  and in working directory. (If we have one file in staging directory and we modified that file again so that file 
+  we can see in both, staging as well as  modified states and if we add this file to staging without committing 
+  previous files to git repos then modified file will be merged with staged file)
+  - To see this, git provides a command called git diff. It shows the file which has the difference in the content
+  and also shows the content which is absent in staging and present in working directory and vice-versa.
+  - To spot the difference, git has a color code. Green colour shows that content is basent in the file which is 
+  in staging area. Grey color menas the content present in the staging area.  
+  - But what if we would have the option to compare previous commit and present staging area and the good thing
+  is git gives us the command using which we can compare this two stages. Same color code git uses here as well.
+  $ git diff --staged
+
+  $ git diff = To check the difference between working directory and staging area.
+
+  $ git diff --staged = To check the difference between previous commit and present staging area.
+
+>> Following the color code is important to spot the difference in both the command output because the o/p 
+might be confusing as it doesn't states anything clearly.                                                                    (Session-8 Ends)
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+Session-9
+
+* Skipping the Staging Area
+  - While working in the team (development) we often get the situation where e deal with minor differences and 
+  dont want to push the file into staging area as it is already being tracked from git.
+  - In such case, we have command using which we can skip the staging area and directly commit the file in repos.
+  
+  $ git commit -a -m "Skipping the staging area Session 8"
+  
+  - But, if we have a file which is not being tracked (any newly created file) such file we cant commit to git 
+  repos. We specifically need to add this file to staging area and then we can commit this file. Once git started 
+  tracking this file then after this we can commit this file directly to git repos as well skipping the staging
+  area.
+  - We just need to make sure that when we pass the message in commit, it should be informative. It should give 
+  fair idea what that commit was about.                                                                                      (Session-9 Ends)   
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+Session-10
+
+* Moving and Renaming Files in Git
+  - While working on a project, we often deal with lot of files. We push them to staging area, rename it sometimes 
+  so that there should not be any conflict and also delete files to avoid duplication. But if we do this renaming 
+  and deletion of files manually then git resonds in a strange way.
+  - Suppose we renamed one file first.txt to thrid.txt which is already being tracked by git and if if we check git 
+  status then git shows that file as deleted and new file third.txt as Untracked. Then we have to add this file
+  to staging area to get proper status. 
+  - But this is not the ideal way to rename files. Git supports one command using which we can do this task easily.
+
+  $ git mv first.txt third.txt
+
+  Through this, git won't mark the old file as deleted. Instead it will take renamed file as normal file.
+  - What if we want to delete files again not manually but by using git bash window, again git supports one 
+  command for this. And this command does two things.
+    1. renames the file
+    2. Adds the renamed file to staging area.
+
+  $ git rm third.txt
+  In the above command, we'll get two options (use --cached to keep the file, or -f to force removal), so if we 
+  want to delete files anyhow then --f is the option but we want to git to stop tracking this file then --cached 
+  is the option.
+
+  - Suppose, from the start we had a bunch of files but we want to ignore some files from it from being tracked.
+  common solution would be to add the name of this file into .gitignore but this solution wont work because
+  this file is being tracked from the start so we need to explicitly tell git to stop tracking this file.
+  followimg is the command using which we can do this.
+
+  $ git rm --cached fit.txt
+
+  After giving thid command, even if we make any changes to this file, git wont show this file in modified
+  because git has stopped tracking this file and also we have added the name of that file in .gitignore.
+  If we remove the name of this file from .gitignore then this file be shown in untracked files.                            (Session-10 Ends)
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+Session-11
+
+* Git Log - Viewing and Changing Commits in Git
+  - Suppose while checking we commonly run into a scenario where where we jus dont want to check logs
+  but also want to check the difference in the commits made. For this we have command
+
+  $ git log -p 
+
+  This follows the same color code which we had discussed earlier. 
+  But what if we want dont want to see all the commits. Means we want to limit the no of commits. Then the 
+  command will go like this.
+
+  $ git log -p -2 
+  
+  This will show 2 commits along with the difference in the those 2 commits.
+
+  - Suppose, we want to check the statistics of the logs and commits but in a shorter manner. It will display
+  changes and insertions, authors, time of the commit etc.
+
+  $ git log --stat
+
+  - Consider a scenario where we need to get all the commits in one-line and need to check it in a glance.
+  This might be the case from the client perspective as well especially helpful in generating reports.
+
+  $ git log --pretty=oneline
+
+  - If we want to spot any specific commits which we are trying to search then we need something quick 
+  and less time-consuming. For this one command is there which will be helpful.
+
+  006400f152d4bcc000c5d764c07fec456b24e265 DOC: Improve 10min/EnhancingPerf.rst (#45390)
+  45460157b23f1fd6530c47ed0c2cdc354f4b27d7 ENH: Add equivalence test for float in to_numeric() GH43693 (#43710)
+  56498ae337602fd11a3c8d0e75cc5ef5d9ffe77e CLN: assorted follow-ups (#45402)
+  c2fc924b2830ca525eee69831c20b25d0030af07 PERF: avoid copies in lib.infer_dtype (#45057)
+  7ac3361a90e6281b3338809859e4bc0c8375242f DEPR: SparseArray.astype(dtype) respect non-sparse dtype (#45339)
+  71c94af0045c4d5aa8a001e92b76478e67b7f4ec BUG/PERF: MaskedArray.__setitem__ validation (#45404)
+  2e5b05e5773f02b653d66373787b493bc3cf3abc STYLE: use option_context almost always (#45407)
+  ca5d9ee9d1eae7c642634413cb22092e0c9334ea DOC: Clean up redirects & dead links (#45408)
+
+
+  $ git log --pretty=short
+
+  commit 59ba159e6557a9f539d9dc88bb536f40ad35c2b6
+  Author: jbrockmendel <jbrockmendel@gmail.com>
+
+    compat: catch dateutil ParserError (#45438)
+
+  commit 399962c22ce709bd18de324e3d54d0e077423ba3
+  Author: jbrockmendel <jbrockmendel@gmail.com>
+
+    CI: py38 builds (#45454)
+  
+>> Author is the one who created/wrote the file.
+   Commit is the one who made changes to that file.  
+
+  - Suppose we want to check whatever the work have happened in a particular repository for the past 2 days.
+
+  $ git log --since=2.days
+
+  It will show all the details and commits happened in the past 2 days. This comes handy when we want to 
+  check what commits we did so that we can plan accordingly.
+
+  - Git supports some patterns through which we can get the output the way we want to. 
+    (https://git-scm.com/docs/git-log) 
+    
+    $ git log --pretty=format:"%h -- %an"
+
+    h = Hash
+    a = Author
+    n = Name    
+
+    e6a20bdef2 -- Thomas Li
+    23f12a13fe -- jbrockmendel
+    07732d7b7d -- jbrockmendel
+
+    $ git log --pretty=format:"%h -- %ae"
+
+    e = email
+
+    d19a31e88a -- 24256554+attack68@users.noreply.github.com
+    4e034ec000 -- jbrockmendel@gmail.com
+    e6a20bdef2 -- 47963215+lithomas1@users.noreply.github.com
+
+  - Suppose we want to edit the commit which is already there in git repository then git provides 
+  command for that as well. This command is useful mostly when we face the situation where we might 
+  had to change or add some message or content which we didnt.
+
+  $ git commit --amend 
+
+  -    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
