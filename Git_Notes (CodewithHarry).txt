@@ -455,9 +455,15 @@ Session 12
 
   $ git checkout -- name_of_the_file 
 
+  After giving this command, the content of the file will be restored from the git repository.
+
+  - Suppose we were working on a project and editing some configuration files which was working fine. While 
+  adding some changes code messed up and it stopped working or not working as expected and not able to figure out 
+  where is error is or what logic should we use. In such case, as we mentioned the previous commit files were
+  working properly. So, we can take the advantage of previous files by restoring them and we will be getting files 
+  which was working. This might be saviour but such move can tarnish the new de  
+
   
-
-
 
 
 
