@@ -447,6 +447,13 @@ Session-11
 
 Session 12
 
+* Unstaging and Unmodifying Files in Git
+  - In a company we deal with lot of file and most of them tends to be an important one. If we edit a file
+  accidentally and later we realise that we tarnished that file but the good thing is we didnt commit that
+  file to the git repository. So, we want to restore the content of this file from our previous commit.
+  Git supports one command using which we can achieve this task.
+
+  $ git checkout -- name_of_the_file 
 
   
 
