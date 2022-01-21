@@ -441,9 +441,14 @@ Session-11
   command for that as well. This command is useful mostly when we face the situation where we might 
   had to change or add some message or content which we didnt.
 
-  $ git commit --amend 
+  $ git commit --amend                                                                                                       (Session-11 Ends)
 
-  -    
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+Session 12
+
+
+  
 
 
 
