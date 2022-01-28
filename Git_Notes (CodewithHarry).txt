@@ -17,10 +17,6 @@ Git is a Version Control System. It has following advantages:
 5. Git maintains integrity.
 6. Git generally only adds data.
 
-Git - Thre Stage Architecture
-
-
-
 
 Session-1
 
@@ -355,7 +351,7 @@ Session-10
 
 ------------------------------------------------------------------------------------------------------------------------------------------------
 
-Session-11
+Session 11
 
 * Git Log - Viewing and Changing Commits in Git
   - Suppose while checking we commonly run into a scenario where where we jus dont want to check logs
@@ -384,37 +380,37 @@ Session-11
   - If we want to spot any specific commits which we are trying to search then we need something quick 
   and less time-consuming. For this one command is there which will be helpful.
 
-  006400f152d4bcc000c5d764c07fec456b24e265 DOC: Improve 10min/EnhancingPerf.rst (#45390)
-  45460157b23f1fd6530c47ed0c2cdc354f4b27d7 ENH: Add equivalence test for float in to_numeric() GH43693 (#43710)
-  56498ae337602fd11a3c8d0e75cc5ef5d9ffe77e CLN: assorted follow-ups (#45402)
-  c2fc924b2830ca525eee69831c20b25d0030af07 PERF: avoid copies in lib.infer_dtype (#45057)
-  7ac3361a90e6281b3338809859e4bc0c8375242f DEPR: SparseArray.astype(dtype) respect non-sparse dtype (#45339)
-  71c94af0045c4d5aa8a001e92b76478e67b7f4ec BUG/PERF: MaskedArray.__setitem__ validation (#45404)
-  2e5b05e5773f02b653d66373787b493bc3cf3abc STYLE: use option_context almost always (#45407)
-  ca5d9ee9d1eae7c642634413cb22092e0c9334ea DOC: Clean up redirects & dead links (#45408)
+    006400f152d4bcc000c5d764c07fec456b24e265 DOC: Improve 10min/EnhancingPerf.rst (#45390)
+    45460157b23f1fd6530c47ed0c2cdc354f4b27d7 ENH: Add equivalence test for float in to_numeric() GH43693 (#43710)
+    56498ae337602fd11a3c8d0e75cc5ef5d9ffe77e CLN: assorted follow-ups (#45402)
+    c2fc924b2830ca525eee69831c20b25d0030af07 PERF: avoid copies in lib.infer_dtype (#45057)
+    7ac3361a90e6281b3338809859e4bc0c8375242f DEPR: SparseArray.astype(dtype) respect non-sparse dtype (#45339)
+    71c94af0045c4d5aa8a001e92b76478e67b7f4ec BUG/PERF: MaskedArray.__setitem__ validation (#45404)
+    2e5b05e5773f02b653d66373787b493bc3cf3abc STYLE: use option_context almost always (#45407)
+    ca5d9ee9d1eae7c642634413cb22092e0c9334ea DOC: Clean up redirects & dead links (#45408)
 
 
-  $ git log --pretty=short
+    $ git log --pretty=short
 
-  commit 59ba159e6557a9f539d9dc88bb536f40ad35c2b6
-  Author: jbrockmendel <jbrockmendel@gmail.com>
+    commit 59ba159e6557a9f539d9dc88bb536f40ad35c2b6
+    Author: jbrockmendel <jbrockmendel@gmail.com>
 
-    compat: catch dateutil ParserError (#45438)
+      compat: catch dateutil ParserError (#45438)
 
-  commit 399962c22ce709bd18de324e3d54d0e077423ba3
-  Author: jbrockmendel <jbrockmendel@gmail.com>
+    commit 399962c22ce709bd18de324e3d54d0e077423ba3
+    Author: jbrockmendel <jbrockmendel@gmail.com>
 
-    CI: py38 builds (#45454)
+      CI: py38 builds (#45454)
   
 >> Author is the one who created/wrote the file.
    Commit is the one who made changes to that file.  
 
   - Suppose we want to check whatever the work have happened in a particular repository for the past 2 days.
 
-  $ git log --since=2.days
+    $ git log --since=2.days
 
-  It will show all the details and commits happened in the past 2 days. This comes handy when we want to 
-  check what commits we did so that we can plan accordingly.
+    It will show all the details and commits happened in the past 2 days. This comes handy when we want to 
+    check what commits we did so that we can plan accordingly.
 
   - Git supports some patterns through which we can get the output the way we want to. 
     (https://git-scm.com/docs/git-log) 
@@ -441,27 +437,103 @@ Session-11
   command for that as well. This command is useful mostly when we face the situation where we might 
   had to change or add some message or content which we didnt.
 
-  $ git commit --amend                                                                                                       (Session-11 Ends)
+    $ git commit --amend                                                                                                       (Session-11 Ends)
 
 ------------------------------------------------------------------------------------------------------------------------------------------------
 
 Session 12
 
 * Unstaging and Unmodifying Files in Git
-  - In a company we deal with lot of file and most of them tends to be an important one. If we edit a file
+  - In a company we deal with lot of files and most of them tends to be an important one. If we edit a file
   accidentally and later we realise that we tarnished that file but the good thing is we didnt commit that
   file to the git repository. So, we want to restore the content of this file from our previous commit.
   Git supports one command using which we can achieve this task.
 
-  $ git checkout -- name_of_the_file 
+    $ git checkout -- name_of_the_file 
 
   After giving this command, the content of the file will be restored from the git repository.
 
   - Suppose we were working on a project and editing some configuration files which was working fine. While 
   adding some changes code messed up and it stopped working or not working as expected and not able to figure out 
-  where is error is or what logic should we use. In such case, as we mentioned the previous commit files were
+  what the error is or what logic should we use. In such case, as we mentioned the previous commit files were
   working properly. So, we can take the advantage of previous files by restoring them and we will be getting files 
-  which was working. This might be saviour but such move can tarnish the new de  
+  which was working. 
+
+    $ git checkout -f
+
+  - Also, this command can be useful when we have a backup of working files in our commit and trying something new
+  so even if if it doesnt work, we can restore our files from commit. 
+  - This might be saviour but such move can tarnish the new development as well. So while working in prod, 
+  we should be careful about such commands because in prod, the whole team works on a singe file someitmes so
+  if we lose some changes made by our team then we dont have a backup of such files.                                        (Session-12 Ends)
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+Session 13
+
+* Working with Remote Repositories
+  - Navigation to setup a remote repository in GitHub:
+    - Open a Github website.
+    - On top right corner we'll find + sign, after clicking on that we'll see New repository.
+    - After this, we need to give name and description for this repository.
+    - After going through this, we'll get a screen with lot of instructions.
+    - Then by going into the folder of which we want files to push/pull to GitHub.
+    - To tell git to add remote as a GitHub we have a command, GitHub is not the only website which hosts
+    git repositories, there are others as well so we need to tell Git to add remote website GitHub with a 
+    complete address.
+      $ git remote add origin https://github.com/Sagar205/PracticeOfSession13.git
+    After adding above command if we give git remote we'll get below output:
+    Administrator@ITL-LT-HP-REF-17-R03211384 MINGW64 /d/Git/Notes (master)
+    $ git remote
+    origin  
+    - To check the push/pull address of a remote repository, we have below command and will get output.
+    Administrator@ITL-LT-HP-REF-17-R03211384 MINGW64 /d/Git/Notes (master)
+    $ git remote -v
+    origin  https://github.com/Sagar205/PracticeOfSession13.git (fetch)
+    origin  https://github.com/Sagar205/PracticeOfSession13.git (push)
+    - Now, if we try to push our files then we'll get an error stating we dont have permission to do so.
+    Because, we havent generated/included SSH key into GitHub yet. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   
 
